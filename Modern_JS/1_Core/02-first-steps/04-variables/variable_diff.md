@@ -130,7 +130,7 @@ if(true){
 
 `지역변수가 전역변수보다 우선 순위를 갖는다.`
 
-### 객체와 프로퍼티와 메소드
+## 객체와 프로퍼티와 메소드
 
 자바스크립트의 기본 타입(data type)은 객체(object)이다.
 
@@ -178,7 +178,7 @@ console.log(a); // 10
 
 let이나 const로 선언한 변수 a는 브라우저 전역객체인 window의 프로퍼티로 할당되지 않았음을 알 수 있다.
 
-### 결론
+## 결론
 
 1. const 와 let을 이용해서 변수를 선언하자.
 
@@ -186,7 +186,12 @@ let이나 const로 선언한 변수 a는 브라우저 전역객체인 window의 
 
 3. var는 사용하지 말자.
 
-[label](https://img1.daumcdn.net/thumb/R1280x0/?scode%3Dmtistory2%26fname%3Dhttps%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FuwkjU%2Fbtrti3BFozy%2FK7FdMrv8bkEeDOrn8LW0MK%2Fimg.png)
+| 키워드            | const | let | var |
+| ----------------- | ----- | --- | --- |
+| global scope      | X     | X   | O   |
+| function scope    | O     | O   | O   |
+| block scope       | O     | O   | X   |
+| can be reassigned | X     | O   | O   |
 
 [참고 : var, let, const 차이점](https://inpa.tistory.com/entry/JS-📚-var-let-const-차이점-변수-호이스팅)
 
