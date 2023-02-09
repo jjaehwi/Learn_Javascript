@@ -76,7 +76,9 @@ let message = "Hello";
 *!*var*/!* message = 'Hello';
 ```
 
-`var`는 `let`과 거의 동일하게 동작한다. `var`도 `let`처럼 변수를 선언하는 데 쓰이지만 `var`는 '오래된' 방식이다. (차이점 --> variable_diff.md 자료 참고)
+`var`는 `let`과 거의 동일하게 동작한다. `var`도 `let`처럼 변수를 선언하는 데 쓰이지만 `var`는 '오래된' 방식이다.
+
+[차이점 : variable_diff.md 참고](https://github.com/jjaehwi/Learn_Javascript/blob/main/Modern_JS/1_Core/02-first-steps/04-variables/variable_diff.md)
 
 원하는 만큼 값을 변경할 수 있다.
 
@@ -121,16 +123,6 @@ let message = "That"; // SyntaxError: 'message' has already been declared
 ```
 
 따라서 변수는 딱 한 번만 선언하고, 선언한 변수를 참조할 때는 `let` 없이 변수명만 사용해 참조해야한다.
-
-```smart header="함수형 언어"
-참고
-
-[함수형(functional)](https://en.wikipedia.org/wiki/Functional_programming) 프로그래밍 언어는 변숫값 변경을 금지합니다. [스칼라(Scala)](http://www.scala-lang.org/)와 [얼랭(Erlang)](http://www.erlang.org/)은 대표적인 함수형 언어입니다.
-
-이들 언어에서는 '상자 속에' 값이 일단 저장되면, 그 값을 영원히 유지합니다. 다른 값을 저장하고 싶다면 새로운 상자를 만들어야(새 변수를 선언해야)만 합니다. 이전 변수를 재사용할 수 없습니다.
-
-처음 봤을 땐 좀 이상해 보일 수 있지만, 함수형 언어는 중대한 개발에 상당히 적합한 언어입니다. 이런 제약이 장점으로 작용하는 병렬 계산(parallel computation)과 같은 영역도 있죠. 당장은 사용할 계획이 없더라도 이런 언어를 공부하는 것은 시야를 넓히는 데 도움이 되므로, 학습을 권유 드립니다.
-```
 
 ## 변수 명명 규칙
 
@@ -295,8 +287,8 @@ const pageLoadTime = /* 웹페이지를 로드하는데 걸린 시간 */;
 
 `var`, `let`, `const`를 사용해 변수를 선언할 수 있다. 선언된 변수엔 데이터를 저장할 수 있다.
 
-- `let` -- 모던한 변수 선언 키워드.
-- `var` -- 오래된 변수 선언 키워드. 잘 사용하지 않는다.
-- `const` -- `let`과 비슷하지만, 변수의 값을 변경할 수 없다.
+- `let` - 모던한 변수 선언 키워드.
+- `var` - 오래된 변수 선언 키워드. 잘 사용하지 않는다.
+- `const` - `let`과 비슷하지만, 변수의 값을 변경할 수 없다.
 
 변수명은 변수가 담고 있는 것이 무엇인지 쉽게 알 수 있도록 지어져야 한다.
