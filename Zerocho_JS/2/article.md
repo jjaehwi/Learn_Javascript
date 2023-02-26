@@ -100,3 +100,103 @@ parseInt('3월') - 0 // 3
 parseInt('3월') // 3
 Number('3월') // NaN
 ```
+
+## 2-5. 연산자 우선순위, 소수 계산 주의점
+
+- 연산자 우선 순위 : [정리 해놓은 모던 자바스크립트 참고](https://github.com/jjaehwi/Learn_Javascript/blob/main/Modern_JS/1_Core/02-first-steps/08-operators/article.md)
+
+- **소(실수) 계산 시 주의할 점**
+
+자바스크립트는 `정수, 실수 나눠져 있는 것이 아닌 전부 숫자 로 취급`한다.
+
+`부동소수점 문제` 발생 : 간단히 고치는 방법은 실수를 정수로 바꿔서 계산한 뒤, 마지막에 다시 실수로 바꾸면 해결
+
+```
+0.5 + 0.5 // 1
+0.1 + 0.2 // 0.30000000000000004
+0.3 - 0.1 // 0.19999999999999998
+(0.3 * 10 - 0.1 * 10) / 10 // 0.2
+```
+
+## 2-6. 불 값 (boolean, 값들의 비교)
+
+- 부동소수점 문제가 발생하는 이유는 컴퓨터가 실제로 1 과 0 밖에 모르기 때문이다. 1 과 0 은 참(true), 거짓(false) 에 대응된다. 자바스크립트에도 true 와 false 를 나타내는 `불 값(boolean) 이라는 자료형`이 있다.
+
+```
+true // true
+false // false
+typeof true // 'boolean'
+typeof 'true' // 'string'
+5 < 3 // false
+NaN == NaN // false
+NaN != NaN // true
+true > false // true
+```
+
+- **문자열끼리 비교하는 경우** : 기본적으로 `문자의 번호(ASCII코드)를 따른다.` 문자의 번호가 클수록 값이 큰 것이다. 첫 문자가 같은 글자일 때는 첫 문자를 빼고 나머지를 다시 비교한다.
+
+```
+'a'.charCodeAt() // 97
+'b'.charCodeAt() // 98
+'a' > 'b' // false
+'ab' > 'a' // true
+```
+
+- **다른 자료형끼리 비교하는 경우** : 빼기 연산자 때처럼 `다른 자료형이 모두 숫자로 형 변환`된 후 비교한다.
+
+```
+'3' < 5 // true
+'abc' < 5 // false ('abc'를 숫자로 변환하면 NaN)
+'0' < true // true (0 < 1)
+```
+
+- **== 와 ===** : `==` 은 `값만 비교`하고 자료형은 비교하지 않지만 , `===` 은 **`값을 비교하고 자료형 까지 같은지 비교`** 한다. `!=` 과 `!==` 도 마찬가지 이다.
+
+```
+'1' == 1 // true
+1 == true // true
+'1' === 1 // false
+1 === true // false
+1 != '1' // false
+1 !== '1' // true
+```
+
+## 2-7. 논리연산자
+
+- 불 값은 논리식을 다룰 때 많이 사용한다. 프로그래밍에서는 AND, OR 와 같은 연결고리를 표현해주는 연산자가 있다.
+
+```
+10 > 5 && 6 < 8 // true (&& 는 AND)
+10 > 5 || 6 < 8 // false (|| 는 OR)
+!true // false
+!(2 < 0) // true
+!2 < 0 // false
+!!'a' // true (boolean 으로 형 변환한 것)
+!!false // false
+!!'' // false
+!!0 // false
+!!NaN // false
+```
+
+**`false`, `'' (빈 문자열)`, `0`, `NaN`, `undefined`, `null`, (document.all)** 은 boolean 형 변환을 하면 false 가 되는 것들이다.
+
+## 2-8. undefined 와 null
+
+- 문자열, 숫자, 불 값 자료형에 대해 공부했는데, 이 외에도 네 가지 (undefined, null, object, symbol) 가 더 있다. `undefined` 와 `null` 자료형은 `빈 값 (비어 있음)을 표현`한다는 공통점도 있지만 차이점도 있다.
+
+```
+typeof undefined // 'undefined'
+typeof null // 'object'
+undefined == false // false
+undefined == 0 // false
+undefined == null // true
+undefined === null // false
+!!undefined // false
+!!null // false
+```
+
+- `undefined` 는 `보통 반환할 결과값이 없을 때` 나온다. console.log 명령어는 콘솔에 무언가를 출력하지만, 그 자체로는 결과값이 없기 때문에 undefined 가 반환된다.
+
+- **typeof null 의 결과값은 'null' 이 아니고 'object' 이다.** 이 현상은 자바스크립트에서 유명한 **버그**이다. 원래는 'null' 이 나와야하지만 초창기 실수 때문에 'object' 가 됐다. 따라서 null 값인지 확인하기 위해서는 `=== null` 을 사용해야 한다.
+
+- null 과 undefined 는 둘 다 빈 값이라서 어떨 때 사용하는지 헷갈릴 수 있다. `undefined 는 기본값이라는 의미`라도 있지만, `null 은 역할이 없다.` 일부 개발자는 null 을 의도적으로 사용하는 경우가 있는데, 변수를 배울 때 공부한다.
