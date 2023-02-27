@@ -270,3 +270,89 @@ change // "바꿨다"
 - var 은 let 과 const 로 대체 가능하다.
 
 [var, let, const 차이점 : variable_diff.md 참고](https://github.com/jjaehwi/Learn_Javascript/blob/main/Modern_JS/1_Core/02-first-steps/04-variables/variable_diff.md)
+
+## 2-13. 조건문 (if)
+
+- **`조건문`**은 `주어진 조건에 따라 코드를 실행하거나 실행하지 않는 '문'` 이다.
+
+- 조건문은 조건식과 동작문으로 구분된다. 조건식이 참인 값이면 내부의 동작문이 실행되고, 거짓인 값이면 동작문이 실행되지 않는다.
+
+```
+if (조건식)
+    동작문;
+
+if(true){
+    console.log('Hello, if!');
+}
+// 'Hello, if!'
+// undefined (리턴값)
+```
+
+## 2-14. else, else if, switch
+
+- 분기를 표현하는 조건문 `else`
+
+```
+if (조건식){
+    동작문;
+} else {
+    동작문;
+}
+```
+
+- 세 가지 경우의 수를 표현하는 조건문 `else if`
+
+```
+if (조건식){
+    동작문;
+} else if (조건식){
+    동작문;
+} else {
+    동작문;
+}
+```
+
+**else if 문 뒤에 else 문이 반드시 나와야하는 것은 아니다. 단, if 문은 항상 처음에 나와야 한다.**
+
+- 조건문도 문이기 때문에 중괄호 안에 다시 넣어서 `중첩 if 문`을 만들 수 있다. 하지만 중첩 if 조건문은 피하는게 좋다. `중첩 if 문은 논리적으로 if-else if-else 문으로 변환할 수 있다.` 가독성을 높이자.
+
+- `switch` 조건문으로 분기하기
+
+```
+switch (조건식) {
+    case 비교조건식1:
+        동작문;
+        break;
+    case 비교조건식2:
+        동작문;
+        break;
+    default:
+        디폴트;
+}
+```
+
+switch 옆 `소괄호의 조건식의 값이 case 의 비교 조건식 값과 일치(===)` 하면 해당 동작문이 실행된다. 보통 조건식에 변수를 넣고, 비교 조건식에는 변수와 비교할 값을 넣는다.
+
+## 2-15. 조건부 연산자 (삼항 연산자)
+
+**기본 형식 : `조건식 ? 참일 때 사용되는 식 : 거짓일 때 실행되는 식`**
+
+- 조건부 연산자는 `문이 아니라 식이기 때문에 결과값이 나온다.`
+
+- 조건부 연산은 보통 `조건에 따라 달라지는 값을 변수에 대입하기 위해 사용`한다.
+
+- if 문으로 변경 가능하다.
+
+- 조건부 연산도 `중첩해서 사용할 수 있다.`
+
+```
+5 > 0 ? '참' : '거짓'; // '참'
+let value = 5 < 0 ? '참' : '거짓'; // undefined
+value; // '거짓'
+
+let condition1 = true;
+let condition2 = false;
+let value2 = condition1 ? (condition2 ? '둘 다 참' : 'condition1 만 참') : 'condition1 이 거짓';
+console.log(value2);
+// 'condition1 만 참'
+```
