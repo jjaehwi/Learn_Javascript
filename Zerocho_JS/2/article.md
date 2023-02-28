@@ -466,3 +466,187 @@ for(let i = 1, j = 0; i<=4; i++){
   	j = j + 1;
 }
 ```
+
+## 2-21. 배열 기본
+
+**`객체 (object)`** 는 자료형의 일종으로 다양한 값을 모아둔 또 다른 값이다. 객체의 종류는 크게 `배열 (array)`, `함수 (function)`, `배열이나 함수가 아닌 객체`로 나눌 수 있다.
+
+**배열**
+
+- **배열**은 `다양한 값, 다양한 자료형들을 하나로 묶어둔 것`이다.
+
+```
+const apple = '사과';
+const orange = '오렌지';
+const pear = '배';
+const strawberry = '딸기';
+를 배열로 묶으면...
+const fruits = ['사과','오렌지','배','딸기']
+console.log(fruits[0]); // 사과
+console.log(fruits[1]); // 오렌지
+console.log(fruits[2]); // 배
+console.log(fruits[3]); // 딸기
+```
+
+- 배열을 만들기 위해 `대괄호 ([]) 로 묶으면 되고`, 배열 안에 있는 각각의 값을 `요소 (element)` 라고 한다.
+
+- 배열 내부의 값에 개별적으로 접근이 가능하다. `배열의 자리수 (index) 는 0 부터 시작한다.`
+
+- 배열 안에 넣는 값에는 **제한이 없다.**
+
+```
+const arrayOfArray = [[1,2,3],[4,5]];
+arrayOfArray[0]; // [1,2,3]
+
+const a = 10;
+const b = 20;
+const variableArray = [a,b,30];
+variableArray[1]; // 20
+
+const everything = ['사과', 1, undefined, true, '배열', null];
+const duplicated = ['가', '가', '가', '가', '가'];
+const empty = [];
+```
+
+- arrayOfArray 배열은 배열 내부에 배열이 들어있다. 이러한 배열을 `이차원 배열` 이라고 한다.
+
+- **배열의 요소 개수를 구할 땐, 배열 이름 뒤에 `.length` 를 붙이면 된다.**
+
+```
+const emptyValue = [null, undefined, false, '', NaN];
+console.log(emptyValue.length);
+
+결과
+5
+```
+
+- **배열을 만든 후 중간에 배열을 수정할 수 있다. 요소를 `추가, 수정, 제거` 가능하다.**
+
+```
+1. 배열의 마지막에 요소 추가하기
+const target = ['가', '나', '다', '라', '마'];
+target[target.length] = '바';
+console.log(target);
+
+결과
+(6) ['가', '나', '다', '라', '마', '바']
+
+1-2. 배열의 마지막에 요소 추가하는 push
+const target = ['가', '나', '다', '라', '마'];
+target.push('바');
+console.log(target);
+
+결과
+(6) ['가', '나', '다', '라', '마', '바']
+
+2. 배열의 제일 앞에 값을 추가하는 unshift
+const target = ['나', '다', '라', '마', '바'];
+target.unshift('가');
+console.log(target);
+
+결과
+(6) ['가', '나', '다', '라', '마', '바']
+```
+
+```
+<참고> const 인데 수정이 가능한 이유..?
+
+- const 가 엄밀히 상수는 아니라고 했었는데, const 에는 새로운 값을 대입 (=) 하지만 못한다고 기억하자. (통째로 재할당이 불가능)
+
+- const 에 객체 (배열, 함수, 객체 리터럴) 가 대입된 경우 객체 내부의 속성이나 배열의 요소는 수정할 수 있다.
+
+const target 2 = ['a', 'b', 'c', 'd', 'e'];
+target2[0] = 'h'; // 객체의 내부는 바꿀 수 있으나
+target2 = ['f', 'g']; // 객체를 통째로 바꾸는 것은 불가능
+```
+
+## 2-22 배열 메서드 (수정, 조회)
+
+- **배열에서 중간 요소를 다룰 때는 주로 `splice` 기능**을 사용한다.
+
+```
+3. 배열에서 마지막 요소 제거하는 pop
+const target = ['가', '나', '다', '라', '마'];
+target.pop();
+console.log(target);
+
+결과
+(4) ['가', '나', '다', '라']
+
+4. 배열에서 첫번째 요소 제거하는 shift
+const target = ['가', '나', '다', '라', '마'];
+target.shift();
+console.log(target);
+
+결과
+(4) ['나', '다', '라', '마']
+
+5. 배열의 중간 요소 제거하기 -> splice 사용
+const target = ['가', '나', '다', '라', '마'];
+target.splice(1, 1);
+console.log(target);
+
+결과
+(4) ['가', '다', '라', '마']
+```
+
+- `splice(a, b)` : index a 부터 b 개를 지운다.
+
+- `splice (a)` : index a 부터 끝까지 다 지운다.
+
+- `splice(a, b, c, d)` : index a 부터 b 개를 지우고 지워진 자리에 c 와 d 를 끼워넣는다.
+
+```
+splice 응용
+const arr = ['가', '나', '다', '라', '마'];
+arr.splice(2, 0, '바') // index 2 자리부터 0 개를 지우고 '바' 를 삽입
+arr
+
+결과
+(6) ['가', '나', '바', '다', '라', '마']
+```
+
+- **배열에서 특정 요소가 있는지 찾기 위해 `includes` 기능**을 사용한다. 주어진 값이 내부에 존재하면 true 가 되고, 존재하지 않으면 false 가 된다.
+
+- 검색하고 싶은 값이 **몇 번째 인덱스에 위치**하는지도 알 수 있다. `indexOf` 와 `lastIndexOf` 기능을 사용한다.
+
+```
+6. 특정 요소 찾는 includes
+const target = ['가', '나', '다', '라', '마'];
+const result = target.includes('다');
+const result2 = target.includes('카');
+console.log(result);
+console.log(result2);
+
+결과
+true
+false
+
+7. 특정 요소 인덱스 위치 알 수 있는 indexOf, lastIndexOf
+const target = ['라', '나', '다', '라', '다'];
+const result = target.indexOf('다');
+const result2 = target.lastIndexOf('라');
+const result3 = target.indexOf('가');
+console.log(result);
+console.log(result2);
+console.log(result3);
+
+결과
+2 // 앞에서 부터 찾는다
+3 // 뒤에서부터 찾는다
+-1 // 결과가 없으면 -1
+```
+
+## 2-23. 배열 메서드 응용하기
+
+문제 : 다음 배열에서 '라' 를 모두 제거해라. indexOf 와 splice 를 사용해라.
+
+```
+const arr = ['가', '라', '다', '라', '마', '라'];
+while(arr.indexOf('라')!=-1)
+    arr.splice(arr.indexOf('라'),1);
+arr;
+
+결과
+(3) ['가', '다', '마']
+```
