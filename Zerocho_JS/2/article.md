@@ -471,7 +471,7 @@ for(let i = 1, j = 0; i<=4; i++){
 
 **`객체 (object)`** 는 자료형의 일종으로 다양한 값을 모아둔 또 다른 값이다. 객체의 종류는 크게 `배열 (array)`, `함수 (function)`, `배열이나 함수가 아닌 객체`로 나눌 수 있다.
 
-**배열**
+**배열 (array)**
 
 - **배열**은 `다양한 값, 다양한 자료형들을 하나로 묶어둔 것`이다.
 
@@ -653,6 +653,8 @@ arr;
 
 ## 2-24. 함수 기본
 
+**함수 (function)**
+
 - 프로그래밍에서 **`함수 (function) 는 일정한 동작을 수행하는 코드를 의미`**한다.
 
 - 함수를 미리 만들어두고 원할 때 실행해서 정해진 동작을 수행하게 할 수 있는 것이다.
@@ -733,6 +735,7 @@ argument
 - 함수가 하나의 매개변수와 하나의 인수만을 가지는 것은 아니고, 각각 **여러 개를 가질 수 있고**, **매개변수와 인수의 개수가 일치하지 않아도 된다.**
 
 ```
+1. 매개변수가 더 많은 경우
 function a(w, x, y, z){
     console.log(w, x, y, z);
     console.log(arguments);
@@ -743,6 +746,7 @@ a('Hello', 'Parameter', 'Argument');
 Hello Parameter Argument undefined (짝 지어지는 게 없어서 undefined)
 Arguments(3) ['Hello', 'Parameter', 'Argument']
 
+2. 인수가 더 많은 경우
 function a(w, x){
     console.log(w, x);
 }
@@ -753,3 +757,134 @@ Hello Parameter (짝 지어지는게 없어서 무시됨)
 ```
 
 - **인수가 몇 개 들어왔는지 알 수 있게 `arguments` 라는 특수한 값**을 사용할 수 있다. 이 값은 화살표 함수가 아닌 `function 에서만 사용 가능`하다. 이 값을 쓰면 넣었던 인수들을 배열 형태로 출력한다.
+
+## 2-26. 객체 리터럴 기본
+
+**객체 리터럴**
+
+- `객체`는 **여러 개의 변수를 하나의 변수로 묶을 때 사용**한다.
+
+```
+const people = {
+    name: '재휘',
+    year: 1999,
+    month: 5,
+    date: 31,
+    gender: 'M',
+};
+```
+
+- people 이라는 변수를 선언하고, 그 안에 정보를 모아두었다. 정보들은 {} 안에 묶여있다. **`{} 를 사용해 객체를 표현하는 것을 객체 리터럴`** 이라고 한다.
+
+- 객체 내부에 사용되는 name, year, month, date, gender 와 같은 정보들을 **`속성 (property)`** 라고 한다.
+
+- 속성은 `속성 이름`과 `속성 값`으로 구분된다. name: '재휘' 에서 name 이 속성 이름이고, '재휘' 는 속성 값이다.
+
+- `속성 이름은 문자열`이어야 하고, `속성 값은 자바스크립트의 모든 값`이 들어갈 수 있다. `객체의 속성 이름을 통해 속성 값에 접근`할 수 있다.
+
+```
+const people = {
+    name: '재휘',
+    year: 1999,
+    month: 5,
+    date: 31,
+    gender: 'M',
+};
+console.log(people.name);
+console.log(people['name']);
+console.log(people.date);
+console.log(people['date']);
+
+결과
+재휘
+재휘
+31
+31
+```
+
+- 객체 속성을 `수정`하려면 속성 이름으로 속성 값에 접근해서 고치면 된다. 추가하는 것도 마찬가지이다.
+
+- 객체 내부의 속성을 `제거`할 땐, **`delete 변수.속성;`** 을 하면 해당 속성이 제거되고, 이 때 `제거된 속성 값은 undefined` 가 된다.
+
+```
+people.name = '이재휘';
+console.log(people.name); // 이재휘
+
+delete people.gender;
+console.log(people.gender); // undefined
+```
+
+**배열과 함수가 객체인 이유**
+
+- 배열과 함수가 객체인 이유는 `객체의 성질을 모두 다 사용할 수 있기 때문`이다.
+
+- `배열과 함수에도 속성들을 추가할 수 있고 수정 및 제거할 수도 있다.` 객체는 함수와 배열을 포함하는 개념이라서 {} 를 사용해 만든 객체를 객체 리터럴 이라고 따로 부르는 것이다.
+
+```
+function hello(){}
+hello.a = 'really?';
+const array = [];
+array.b = 'wow';
+console.log(hello.a); // really?
+console.log(array.b); // wow
+```
+
+**⭐️ 메서드 (method)**
+
+- 속성 값으로 자바스크립트의 모든 값을 넣을 수 있는데, **`객체의 속성 값으로 함수를 넣었을 때`, 이 속성을 특별히 `메서드 (method)`** 라고 한다.
+
+```
+const debug = {
+    log : function(value) {
+        console.log(value);
+    },
+};
+
+debug.log('Hello, Method'); // Hello, Method
+
+(console.log 이다.. console 객체의 log 메서드를 호출 하던 것..)
+```
+
+## 2-27. 객체의 비교 (원시값과의 차이점)
+
+- 객체를 다룰 때 많이 하는 실수인 `객체 간에 비교 연산`에 대해 보자.
+
+```
+{} === {} // false
+```
+
+- `객체 끼리는 서로 비교하면 false` 가 나온다.
+
+- 객체가 아닌 숫자, 문자열, 불 값, null, undefined 는 모두 true 이다.
+
+- **객체는 모양이 같아도 `생성할 때마다 새로운 객체가 생성`되기 때문이고, 따라서 같은 객체인지 `비교하고 싶다면 기존 객체를 변수에 저장`해 두어야 한다.**
+
+```
+const a = {name: 'lee'};
+const array = [1, 2, a];
+console.log(a === array[2]); // true
+```
+
+**참조와 복사**
+
+```
+const a = {name: 'lee'};
+const b = a;
+a.name = 'hero';
+console.log(b.name); // hero
+```
+
+- 변수 b 에 a 를 대입한 상황이다. a 변수의 name 속성 값을 변경했는데, b 변수도 같이 변경이 되었다. `객체를 저장한 변수를 다른 변수에 대입하면 두 변수 모두 같은 객체를 저장하는 셈`이다. 그래서 a 와 b 변수 모두 같은 객체를 저장하고 있는 것이므로 객체의 속성 값을 바꾸면 변수 a 와 b 모두 바뀌는 것처럼 보이는 것이다.
+
+- 이러한 상황일 때 **변수 a 와 b 가 같은 객체를 `참조 (reference)`** 하고 있다고 표현하고 **`a 와 b 는 객체 간에 참조 관계에 있다`**고 표현한다.
+
+```
+let a = 'lee';
+let b = a;
+a = 'hero';
+console.log(b); // lee
+```
+
+- 변수 b 에 a 를 대입했다. 하지만 a 를 바꿔도 b 는 영향을 받지 않았다. `객체가 아닌 값을 변수에 저장한 경우에는 참조 관계가 생기지 않기 때문이다.`
+
+- 이렇게 **참조가 생기지 않는 상황을 `복사 (copy)`** 라고 부른다. **`객체를 변수에 담으면 참조 관계`가 생긴다는 것을 기억하자.**
