@@ -650,3 +650,106 @@ arr;
 결과
 (3) ['가', '다', '마']
 ```
+
+## 2-24. 함수 기본
+
+- 프로그래밍에서 **`함수 (function) 는 일정한 동작을 수행하는 코드를 의미`**한다.
+
+- 함수를 미리 만들어두고 원할 때 실행해서 정해진 동작을 수행하게 할 수 있는 것이다.
+
+- **함수를 만들 때**는 보통 `function 예약어`를 사용하거나 `=> 기호`를 사용한다. 화살표 기호를 사용한 함수를 **화살표 함수 (arrow function)** 이라고 한다.
+
+```
+1. function a(){} // 함수 선언문
+2. const b = function() {}; // 함수 표현식
+3. const c = () => {}; // 화살표 함수
+```
+
+**함수 선언문 (function declaration statement)** : a 함수 처럼 함수를 상수에 대입하는 대신 function 키워드 뒤에 함수 이름을 넣어주는 방식
+
+**함수 표현식 (function expression)** : 함수 b 처럼 상수나 변수에 대입하는 방식
+
+- 변수와 마찬가지로 함수를 만드는 행위도 `선언한다 (declare)` 라고 표현한다.
+
+- 위의 1, 2, 3 의 세 방식에는 큰 차이가 있지만 앞으로 새 개념이 등장할 때마다 배운다. (this 배울 때)
+
+- 만든 함수를 사용하는 행위를 `호출한다 (call)` 라고 표현한다.
+
+```
+function a(){
+    console.log('Hello');
+    console.log('Function');
+}
+a();
+
+결과
+Hello
+Function
+```
+
+**return 이해하기**
+
+- 함수를 호출하면 항상 `결과값`이 나오는데, 기본적으로 `undefined` 가 나온다. 이 값을 `반환값 (return value)` 이라고 한다. return 이 나오면 `함수를 종료`하면서 `반환값을 준다.`
+
+- `함수의 반환값도 값이므로 다른 식이나 문에 넣어 사용`할 수 있다. 함수의 반환값을 상수나 변수에 대입할 수 있다.
+
+```
+1. 값을 반환하는 역할
+function a(){
+    return 10;
+}
+console.log(a());
+
+결과
+10
+
+2. 함수의 실행을 중간에 멈추는 역할
+function a(){
+    console.log('Hello');
+    return;
+    console.log('Return');
+}
+a();
+
+결과
+Hello
+```
+
+## 2-25. 매개변수 (parameter) 와 인수 (argument)
+
+- 함수를 `선언할 땐 매개변수 (parameter)`, 함수를 `호출할 땐 인수 (argument)`
+
+```
+function a(parameter){
+    console.log(parameter);
+}
+a('argument');
+
+결과
+(parameter = 'argument')
+argument
+```
+
+- 함수가 하나의 매개변수와 하나의 인수만을 가지는 것은 아니고, 각각 **여러 개를 가질 수 있고**, **매개변수와 인수의 개수가 일치하지 않아도 된다.**
+
+```
+function a(w, x, y, z){
+    console.log(w, x, y, z);
+    console.log(arguments);
+}
+a('Hello', 'Parameter', 'Argument');
+
+결과
+Hello Parameter Argument undefined (짝 지어지는 게 없어서 undefined)
+Arguments(3) ['Hello', 'Parameter', 'Argument']
+
+function a(w, x){
+    console.log(w, x);
+}
+a('Hello', 'Parameter', 'Argument');
+
+결과
+Hello Parameter (짝 지어지는게 없어서 무시됨)
+```
+
+- **인수가 몇 개 들어왔는지 알 수 있게 `arguments` 라는 특수한 값**을 사용할 수 있다. 이 값은 화살표 함수가 아닌 `function 에서만 사용 가능`하다. 이 값을 쓰면 넣었던 인수들을 배열 형태로 출력한다.
