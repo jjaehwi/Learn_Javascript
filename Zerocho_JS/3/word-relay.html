@@ -16,6 +16,16 @@
       const number = parseInt(prompt("몇 명이 참가하나요?"), 10);
       const $span = document.querySelectorAll("span");
       console.log($span);
+
+      document
+        .querySelector("input")
+        .addEventListener("input", function (event) {
+          console.log("글자 입력", event.target.value);
+        });
+
+      document.querySelector("button").addEventListener("click", function () {
+        console.log("버튼 클릭");
+      });
     </script>
   </body>
 </html>

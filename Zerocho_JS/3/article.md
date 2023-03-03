@@ -150,3 +150,30 @@ document.querySelector('body #target button'); // body 태그 안에 id 가 targ
 ```
 a #b .c
 ```
+
+## 3-5. 이벤트 리스너 달기 (콜백함수)
+
+- HTML 이 화면을 만들어주면 사용자는 `이벤트를 통해서 상호작용` 한다.
+
+- `querySelector 로 태그를 선택한 다음 .addEventListener('이벤트 이름', 리스너 함수);` 을 통해 이벤트가 발생했을 때 function 이 실행되도록 할 수 있다. **첫 번째 인수로 문자열, 두 번째 인수로 함수자리** 이다.
+
+- **`리스너 함수 또는 콜백 함수 (callback function)` 는 어떤 동작이 실행되고 난 뒤에 연이어 실행되는 함수**
+
+```
+1.
+태그.addEventListener('이벤트 이름', 리스너 함수);
+
+2.
+const onClick = function () {
+    console.log('버튼 클릭'); // 버튼이 클릭 (click) 될 때마다 console 이 찍힌다.
+}
+document.querySelector('button').addEventListener('click', onClick);
+
+3.
+document
+        .querySelector("input")
+        .addEventListener("input", function (event) {
+          console.log("글자 입력", event.target.value);
+        });
+// event.target.value에 사용자가 입력한 것이 들어가기 때문에, input 에 사용자가 입력을 할 때 어떤 글자가 입력되었는지 알 수 있다.
+```
