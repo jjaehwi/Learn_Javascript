@@ -13,19 +13,30 @@
     <input type="text" />
     <button>입력</button>
     <script>
-      const number = parseInt(prompt("몇 명이 참가하나요?"), 10);
-      const $span = document.querySelectorAll("span");
-      console.log($span);
+      const number = Number(prompt("몇 명이 참가하나요?"));
+      const $button = document.querySelector("button");
+      const $input = document.querySelector("input");
+      const $word = document.querySelector("#word");
+      let word; // 제시어
+      let newWord; // 새로 입력한 단어
 
-      document
-        .querySelector("input")
-        .addEventListener("input", function (event) {
-          console.log("글자 입력", event.target.value);
-        });
+      const onClickButton = () => {
+        // 제시어가 비어 있는가?
+        if (!word) {
+          // 비어 있다.
+          word = newWord; // 입력한 단어가 제시어가 된다. (데이터를 바꾸고)
+          $word.textContent = word; // 화면을 바꾼다.
+          $input.value = ""; // input 안의 내용은 value 에 저장되어있다.
+        } else {
+          // 비어 있지 않다.
+        }
+      };
+      const onInput = (event) => {
+        newWord = event.target.value;
+      };
 
-      document.querySelector("button").addEventListener("click", function () {
-        console.log("버튼 클릭");
-      });
+      $button.addEventListener("click", onClickButton);
+      $input.addEventListener("input", onInput);
     </script>
   </body>
 </html>

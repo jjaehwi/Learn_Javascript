@@ -25,6 +25,10 @@
 
 - '몇' 이나 '어떤' 이라는 용어를 사용하여 다양한 경우에 대비할 수 있다.
 
+**순서도**
+
+<img width="288" alt="스크린샷 2023-03-03 오후 11 27 10" src="https://user-images.githubusercontent.com/87372606/222745772-a13201b0-a9be-44be-ae43-141d1b2c464a.png">
+
 ## 3-2. 기본 VS Code 사용법
 
 - 웹 게임은 브라우저에서 돌아가는 프로그램으로 `HTML`, `CSS`, `자바스크립트` 라는 언어를 사용한다.
@@ -176,4 +180,71 @@ document
           console.log("글자 입력", event.target.value);
         });
 // event.target.value에 사용자가 입력한 것이 들어가기 때문에, input 에 사용자가 입력을 할 때 어떤 글자가 입력되었는지 알 수 있다.
+```
+
+## 3-6. 첫 번째 사람인지 판단하기
+
+```
+const number = Number(prompt("몇 명이 참가하나요?"));
+const $button = document.querySelector("button");
+const $input = document.querySelector("input");
+
+const onClickButton = () => {};
+const onInput = (event) => {};
+
+$button.addEventListener("click", onClickButton);
+$input.addEventListener("input", onInput);
+```
+
+- 순서도 중 첫 번째 사람이 제시어를 말한다 부분에서 1. 첫 번째 사람인지 알아야하고, 2. 어떤 제시어를 말했는지 알아야한다.
+
+- 첫 번째 참가자라면 입력된 단어가 제시어가 되는 것이고, 첫 번째 참가자가 아니라면 제시어가 이미 있는 상태에서 이어서 진행된 것이기 때문에 입력된 단어가 올바른지를 판단한다.
+
+- 이런 식으로 처음 순서도에서 더 상세히 쪼개서 순서도를 구체화시킨다.
+
+**순서도 수정**
+
+<img width="410" alt="스크린샷 2023-03-03 오후 11 30 10" src="https://user-images.githubusercontent.com/87372606/222746443-48b78cbc-8d24-49b1-858e-b49ad59de889.png">
+
+- `제시어 부분이 없는 것으로 첫 번째 참가자` 임을 알 수 있다.
+
+- 제시어를 입력받고, 변수에 저장해야한다.
+
+- 새로 입력한 단어를 입력받고, 변수에 저장해야한다.
+
+- 첫 번째 사람이 입력하면 제시어가 채워지고 input 창이 지워져서 다음 입력을 받을 수 있게 된다.
+
+- 제시어가 바뀌고 화면을 바꾸는 것은 `span 태그`를 가져와서 `textContent` 를 이용한다.
+
+**순서도 수정**
+
+<img width="410" alt="스크린샷 2023-03-03 오후 11 40 16" src="https://user-images.githubusercontent.com/87372606/222748808-5ca647bc-364d-4145-989f-4ed890672d56.png">
+
+```
+<script>
+      const number = Number(prompt("몇 명이 참가하나요?"));
+      const $button = document.querySelector("button");
+      const $input = document.querySelector("input");
+      const $word = document.querySelector("#word");
+      let word; // 제시어
+      let newWord; // 새로 입력한 단어
+
+      const onClickButton = () => {
+        // 제시어가 비어 있는가?
+        if (!word) {
+          // 비어 있다.
+          word = newWord; // 입력한 단어가 제시어가 된다. (데이터를 바꾸고)
+          $word.textContent = word; // 화면을 바꾼다.
+          $input.value = ""; // input 안의 내용은 value 에 저장되어있다.
+        } else {
+          // 비어 있지 않다.
+        }
+      };
+      const onInput = (event) => {
+        newWord = event.target.value;
+      };
+
+      $button.addEventListener("click", onClickButton);
+      $input.addEventListener("input", onInput);
+    </script>
 ```
