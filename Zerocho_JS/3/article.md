@@ -248,3 +248,90 @@ $input.addEventListener("input", onInput);
       $input.addEventListener("input", onInput);
     </script>
 ```
+
+## 3-7. 올바른 단어인지 판단하기
+
+- `word[word.length - 1] === newWord[0]` 를 통해 제시어의 마지막 글자와 새로 입력한 단어의 첫 글자가 같은지를 판단할 수 있다.
+
+- 올바르다면 입력한 단어가 제시어가 되고, 화면을 바꾸고, input 안의 내용을 공백으로 바꾼다.
+
+```
+if (word[word.length - 1] === newWord[0]) {
+    // 올바르다
+    word = newWord; // 입력한 단어가 제시어가 된다. (데이터를 바꾸고)
+    $word.textContent = word; // 화면을 바꾼다.
+    $input.value = ""; // input 안의 내용은 value 에 저장되어있다.
+```
+
+- 그리고 다음 사람 차례임을 알리기 위해 `화면의 n 번째 순서라고 바꿔줘야한다.` **마지막 순서라면 1 로 넘겨주고 아니라면 + 1 을 한다.**
+
+**순서도 수정**
+
+<img width="271" alt="스크린샷 2023-03-04 오후 6 18 54" src="https://user-images.githubusercontent.com/87372606/222890165-3faf768f-4006-4004-af12-5d56e00f02e1.png">
+
+```
+const order = Number($order.textContent); // 현재 순서
+    if (order + 1 > number) {
+        $order.textContent = 1;
+    } else {
+        $order.textContent = order + 1;
+    }
+```
+
+## 3-8. 틀렸을 때 오류 표시하기
+
+- 올바르지 않은 단어를 입력했을 때의 처리 --> 화면에 글자를 적어줘도 되지만 alert 함수를 사용해 틀렸다는 것을 알려주자.
+
+```
+else {
+    // 올바르지 않다.
+    alert("올바르지 않은 단어입니다!");
+    }
+```
+
+- 마지막으로 입력창에 `커서를 올려두는 것`은 `input 태그의 focus 함수`를 통해 할 수 있다.
+
+```
+$input.focus(); // 다음 바로 입력할 수 있게 커서를 둔다.
+```
+
+**퀴즈**
+
+- 다음 태그들의 내부 값을 가져올 때 둘 중 어떤 속성을 사용해야 할까?
+
+```
+1. input (value / textContent) -> value
+2. button (value / textContent) -> textContent
+3. select (value / textContent) -> value (input 이랑 비슷한 입력값을 받는 애들임)
+4. div (value / textContent) -> textContent
+5. textarea (value / textContent) -> value (큰 input 이기 때문에 value)
+6. span (value / textContent) -> textContent
+
+뭔가를 입력하는 애들은 value 이고 그 외에는 textContent 이다.
+```
+
+## 3-9. 순서도 최적화하기
+
+- 코드는 완성이 되었는데 `중복되는 부분`이 매우 많다. if 문 분기 때문에 중복이 되는 것인데, 중복되는 부분은 제거해줄 수 있다.
+
+- 순서도 상에서 마름모와 같은 **분기점 때문에 중복된다면 `AND 와 OR 같은 논리연산자`로 최적화**를 할 수 있다.
+
+**순서도 수정**
+
+<img width="346" alt="스크린샷 2023-03-04 오후 6 50 40" src="https://user-images.githubusercontent.com/87372606/222892574-64d4f7bc-d63f-4067-8113-e6caf7b68f84.png">
+
+```
+const onClickButton = () = {
+    if (!word || word[word.length - 1] === newWord[0]) // 제시어가 비어 있거나 올바른 단어인가?
+}
+```
+
+## 3-10. 셀프체크 - 쿵쿵따 게임 만들기
+
+요구사항 1 : 입력할 수 있는 단어를 세 글자로 고정하면 된다.
+
+요구사항 2 : 세 글자가 아니라면 다시 입력하라고 표시하자.
+
+요구사항 3 : 초반에 prompt 함수를 사용해 몇 명이 참가할지 선택할 때, 사용자가 취소를 누르면 다음 코드가 실행되지 않도록 처리하자.
+
+- 힌트 : 사용자가 input 이벤트를 발생시킬 때 입력한 글자가 세 글자인지 확인
