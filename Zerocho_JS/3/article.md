@@ -335,3 +335,17 @@ const onClickButton = () = {
 요구사항 3 : 초반에 prompt 함수를 사용해 몇 명이 참가할지 선택할 때, 사용자가 취소를 누르면 다음 코드가 실행되지 않도록 처리하자.
 
 - 힌트 : 사용자가 input 이벤트를 발생시킬 때 입력한 글자가 세 글자인지 확인
+
+```
+제시어가 비어있는가 OR (단어가 올바른가 AND 단어가 세 글자인가)
+
+if(!word || (word[word.length - 1] === newWord[0] && newWord.length===3))
+```
+
+- **prompt 함수에서 취소를 눌렀다면 값이 `null`** 이 되고, 그 값이 Number 함수에 들어가면 NaN 이 된다. **NaN 이 if 문에 들어가면 항상 false 로 취급**되므로 number 가 null 이면 if 문 내부는 실행되지 않는다.
+
+```
+if (number){
+    이 안에 확인 눌렀을 때의 코드를 넣으면 됨
+}
+```
